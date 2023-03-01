@@ -186,7 +186,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\xampp_ol\\htdocs\\Azzgo\\storage\\framework/cache/data',
+        'path' => 'C:\\xampp\\htdocs\\Azzgo\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -455,7 +455,7 @@
     ),
     'temporary_files' => 
     array (
-      'local_path' => 'C:\\xampp_ol\\htdocs\\Azzgo\\storage\\framework/laravel-excel',
+      'local_path' => 'C:\\xampp\\htdocs\\Azzgo\\storage\\framework/laravel-excel',
       'remote_disk' => NULL,
       'remote_prefix' => NULL,
       'force_resync_remote' => NULL,
@@ -469,12 +469,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp_ol\\htdocs\\Azzgo\\storage\\app',
+        'root' => 'C:\\xampp\\htdocs\\Azzgo\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp_ol\\htdocs\\Azzgo\\storage\\app/public',
+        'root' => 'C:\\xampp\\htdocs\\Azzgo\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -491,7 +491,7 @@
     ),
     'links' => 
     array (
-      'C:\\xampp_ol\\htdocs\\Azzgo\\public\\storage' => 'C:\\xampp_ol\\htdocs\\Azzgo\\storage\\app/public',
+      'C:\\xampp\\htdocs\\Azzgo\\public\\storage' => 'C:\\xampp\\htdocs\\Azzgo\\storage\\app/public',
     ),
   ),
   'hashing' => 
@@ -530,7 +530,7 @@
           'format_to_use_for_docs' => 'json',
           'annotations' => 
           array (
-            0 => 'C:\\xampp_ol\\htdocs\\Azzgo\\app',
+            0 => 'C:\\xampp\\htdocs\\Azzgo\\app',
           ),
         ),
       ),
@@ -562,8 +562,8 @@
       ),
       'paths' => 
       array (
-        'docs' => 'C:\\xampp_ol\\htdocs\\Azzgo\\storage\\api-docs',
-        'views' => 'C:\\xampp_ol\\htdocs\\Azzgo\\resources/views/vendor/l5-swagger',
+        'docs' => 'C:\\xampp\\htdocs\\Azzgo\\storage\\api-docs',
+        'views' => 'C:\\xampp\\htdocs\\Azzgo\\resources/views/vendor/l5-swagger',
         'base' => NULL,
         'swagger_ui_assets_path' => 'vendor/swagger-api/swagger-ui/dist/',
         'excludes' => 
@@ -594,8 +594,8 @@
   array (
     'vendor' => 
     array (
-      'php' => 'C:\\xampp_ol\\htdocs\\Azzgo\\vendor/laravel-lang/lang/src',
-      'json' => 'C:\\xampp_ol\\htdocs\\Azzgo\\vendor/laravel-lang/lang/json',
+      'php' => 'C:\\xampp\\htdocs\\Azzgo\\vendor/laravel-lang/lang/src',
+      'json' => 'C:\\xampp\\htdocs\\Azzgo\\vendor/laravel-lang/lang/json',
     ),
     'locales' => 
     array (
@@ -626,13 +626,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\xampp_ol\\htdocs\\Azzgo\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\Azzgo\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\xampp_ol\\htdocs\\Azzgo\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\Azzgo\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -682,7 +682,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'C:\\xampp_ol\\htdocs\\Azzgo\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\Azzgo\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -739,7 +739,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\xampp_ol\\htdocs\\Azzgo\\resources\\views/vendor/mail',
+        0 => 'C:\\xampp\\htdocs\\Azzgo\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -891,7 +891,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'C:\\xampp_ol\\htdocs\\Azzgo\\storage\\framework/sessions',
+    'files' => 'C:\\xampp\\htdocs\\Azzgo\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -911,9 +911,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\xampp_ol\\htdocs\\Azzgo\\resources\\views',
+      0 => 'C:\\xampp\\htdocs\\Azzgo\\resources\\views',
     ),
-    'compiled' => 'C:\\xampp_ol\\htdocs\\Azzgo\\storage\\framework\\views',
+    'compiled' => 'C:\\xampp\\htdocs\\Azzgo\\storage\\framework\\views',
   ),
   'trustedproxy' => 
   array (

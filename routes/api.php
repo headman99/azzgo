@@ -25,13 +25,13 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/registerPublisher', 'AuthController@registerPublisher');
     Route::post('/registerAdmin', 'AuthController@registerAdmin');
     Route::post('/login', 'AuthController@login');
-    Route::post("/checkEmailVerified","AuthController@checkEmailVerified");
-    Route::post('/sendVerificationMail', 'AuthController@sendVerificationMail');
     Route::get('/getprivacyandterms/{type}', 'TermConditionController@getPrivacyAndTerms');
     Route::get('/storecategories', 'LookupController@getStoreCategories');
     Route::post('/searchproducts', 'PublicController@searchProducts');
     Route::post('/searchpublisherbycategoryid', 'PublicController@searchPublisherByCategoryId');
     Route::get('/notificationtest', 'PublicController@sendNotification');
+    Route::post('/sendVerificationMail', 'AuthController@sendVerificationMail');
+    Route::post("/checkEmailVerified","AuthController@checkEmailVerified");
 });
 
 /*** ADMIN ****/
@@ -161,20 +161,25 @@ Route::group(['middleware' => ['auth:api', 'role:Customer','is_verify_email']], 
     Route::post('/customer/insertNotification', 'CustomerController@insertNotification');
     Route::post('/customer/getPublisherProductSearch', 'CustomerController@getPublisherProductSearch');
     Route::get('customer/getPublishers','CustomerController@getPublishers');
-});
+}); 
 
-Route::group(['middleware' => ['auth:api','is_verify_email']], function () {
+/*Route::group(['middleware' => ['auth:api','is_verify_email']], function () {
     Route::post('/profilePhoto', 'AuthController@profilePhoto');
     Route::get('/onesignalUpdatePlayerId/{playerid}', 'AuthController@onesignalUpdatePlayerId');
     Route::get('/getPreferences','AuthController@getPreferences');
     Route::post('/setPreferences','AuthController@setPreferences');
     Route::post('/setPhotoTheme','AuthController@themePhoto');
     Route::get('/deletePreferences','AuthController@deletePreferences');
-});
+});*/
 
 Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/logout', 'AuthController@logout');
     Route::get('/getUserInfo','AuthController@getUserInfo');
+    Route::get('/getPreferences','AuthController@getPreferences');
+    Route::post('/setPreferences','AuthController@setPreferences');
+    Route::post('/setPhotoTheme','AuthController@themePhoto');
+    Route::get('/deletePreferences','AuthController@deletePreferences');
+    Route::post('/profilePhoto', 'AuthController@profilePhoto');
 });
 
 Route::get('/verify/{email}', 'AuthController@verifyAccount')->name('user.verify');
