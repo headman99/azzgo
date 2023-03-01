@@ -1,0 +1,18 @@
+{
+    "android": {
+        "debug": {
+            "keystore": "./azzgo.keystore",
+            "storePassword": "123456",
+            "alias": "azzgo",
+            "password" : "123456",
+            "keystoreType": ""
+        },
+        "release": {
+            "keystore": "./azzgo.keystore",
+            "storePassword": "123456",
+            "alias": "azzgo",
+            "password" : "123456",
+            "keystoreType": ""
+        }
+    }
+}

@@ -1,0 +1,117 @@
+<cfe-header [title]="'Dettaglio annuncio'"></cfe-header>
+
+<ion-content [color]='colorService.selectedTheme' padding>
+	<div class="back-image"
+		[ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+		<cfe-camera [mode]="cameramode" [label]="'Aggiungi foto principale'" (onTakePhoto)="PhotoCaptured($event)">
+		</cfe-camera>
+		<ion-row class="ion-justify-content-center">
+			<img class="imgUpload" [src]="imgURL" />
+		</ion-row>
+
+		<form #f="ngForm" (ngSubmit)="createAd(f)">
+			<ion-grid fixed>
+				<ion-row justify-content-center>
+					<ion-col size-md="3" size-lg="3" size-xs="0"></ion-col>
+					<ion-col align-self-center size-md="6" size-lg="6" size-xs="12">
+						<div padding>
+							<ion-item>
+								<ion-input (ionChange)="counterTitle = $event.target.value.length" name="title"
+									maxlength="100" type="text" placeholder="Titolo" ngModel required></ion-input>
+								<div class="usage-stats">{{counterTitle}} / 250</div>
+							</ion-item>
+
+							<ion-item>
+								<ion-textarea name="description" type="text" maxlength="250"
+									(ionChange)="counter = $event.target.value.length" placeholder="Descrizione" ngModel
+									required></ion-textarea>
+								<div class="usage-stats">{{counter}} / 250</div>
+							</ion-item>
+
+							<ion-item>
+								<ion-icon slot="start" name="logo-euro"></ion-icon>
+								<ion-input name="price" type="number" placeholder="Prezzo" ngModel required></ion-input>
+							</ion-item>
+						</div>
+					</ion-col>
+					<ion-col size-md="3" size-lg="3" size-xs="0"></ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size-md="3" size-lg="3" size-xs="0"></ion-col>
+					<ion-col size-md="6" size-lg="6" size-xs="12">
+						<ion-item>
+							<ion-toggle name="isvetrina" value="false" ngModel></ion-toggle> Prodotto Vetrina
+						</ion-item>
+					</ion-col>
+					<ion-col size-md="3" size-lg="3" size-xs="0"></ion-col>
+				</ion-row>
+
+				<ion-row>
+					<ion-col size-md="3" size-lg="3" size-xs="0"></ion-col>
+					<ion-col size-md="6" size-lg="6" size-xs="12">
+						<ion-item>
+							<ion-toggle name="isoffer" value="false" ngModel></ion-toggle> Promozione
+						</ion-item>
+					</ion-col>
+					<ion-col size-md="3" size-lg="3" size-xs="0"></ion-col>
+				</ion-row>
+				<ion-row [hidden]="form && !form.controls['isoffer'].value">
+					<ion-col size-md="3" size-lg="3" size-xs="0"></ion-col>
+					<ion-col size-md="6" size-lg="6" size-xs="12">
+						<ion-item>
+							<ion-label> Sconto del % </ion-label>
+							<ion-input slot="end" name="percent" type="number" ngModel></ion-input>
+							<ion-button Slot="end" (click)="calc()"> Applica sconto</ion-button>
+						</ion-item>
+						<ion-item>
+							<ion-label slot="start"> Prezzo scontato </ion-label>
+							<ion-icon name="logo-euro"></ion-icon>
+							<ion-input slot="end" name="saleprice" readonly type="number" ngModel></ion-input>
+						</ion-item>
+					</ion-col>
+					<ion-col size-md="3" size-lg="3" size-xs="0"></ion-col>
+				</ion-row>
+				<ion-row [hidden]="form && !form.controls['isoffer'].value">
+					<ion-col size-md="3" size-lg="3" size-xs="0"></ion-col>
+					<ion-col size-md="6" size-lg="6" size-xs="12">
+						<ion-item>
+							<ion-label> Data inizio </ion-label>
+							<ion-datetime name="startdate" displayFormat="DD/MM/YYYY" max="2030" [min]="minDate"
+								ngModel></ion-datetime>
+						</ion-item>
+					</ion-col>
+					<ion-col size-md="3" size-lg="3" size-xs="0"></ion-col>
+				</ion-row>
+				<ion-row [hidden]="form && !form.controls['isoffer'].value">
+					<ion-col size-md="3" size-lg="3" size-xs="0"></ion-col>
+					<ion-col size-md="6" size-lg="6" size-xs="12">
+						<ion-item>
+							<ion-label> Data fine </ion-label>
+							<ion-datetime name="enddate" displayFormat="DD/MM/YYYY" max="2030" ngModel></ion-datetime>
+						</ion-item>
+					</ion-col>
+					<ion-col size-md="3" size-lg="3" size-xs="0"></ion-col>
+				</ion-row>
+
+
+
+
+			</ion-grid>
+		</form>
+
+		<ion-item *ngIf="adID" routerLink="photos/{{this.adID}}">
+			<ion-label>Aggiungi altre foto</ion-label>
+			<ion-badge slot="end">{{ad?.photos.length}}</ion-badge>
+		</ion-item>
+
+		<!---
+
+
+  -->
+	</div>
+</ion-content>
+
+<ion-footer>
+	<ion-button type="submit" [disabled]="f.invalid" (click)="f.ngSubmit.emit()" expand="full">{{labelconfirmbutton}}
+	</ion-button>
+</ion-footer>

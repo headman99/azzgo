@@ -1,0 +1,107 @@
+<ion-content fixed color="primary">
+	<ion-row class="b-primary">
+		<ion-col size-lg="3"></ion-col>
+		<ion-col size-md="6" size-lg="6" size-xs="12">
+			<div class="login-logo">
+				<img src="assets/img/ionic-logo-white2.svg" alt="AzzGO logo" />
+			</div>
+		</ion-col>
+		<ion-col size-lg="3"></ion-col>
+	</ion-row>
+
+	<ion-grid fixed>
+		<ion-row>
+			<ion-col size-lg="3"></ion-col>
+			<ion-col size-md="6" size-lg="6" size-xs="12">
+				<div padding>
+					<form #loginForm="ngForm" novalidate>
+						<ion-item>
+							<ion-label position="stacked">Email</ion-label>
+							<ion-input [(ngModel)]="login.username" name="username" type="text" #username="ngModel"
+								spellcheck="false" autocapitalize="off" required>
+							</ion-input>
+						</ion-item>
+
+						<ion-text color="light">
+							<p [hidden]="username.valid || submitted == false" class="ion-padding-start">L'email è
+								obbligatoria</p>
+						</ion-text>
+
+						<ion-item>
+							<ion-label position="stacked">Password</ion-label>
+							<ion-input [(ngModel)]="login.password" name="password" [type]="passwordType" #password="ngModel"
+								required> </ion-input>
+								<ion-icon color="light" *ngIf="passwordType =='password'"  (click)="changeType()" name="eye-outline" slot="end"></ion-icon>
+								<ion-icon color="light" *ngIf="passwordType =='text'"  (click)="changeType()" slot="end" name="eye-off-outline"></ion-icon>
+						</ion-item>
+
+						<ion-text color="light">
+							<p [hidden]="password.valid || submitted == false" class="ion-padding-start">La password è
+								obbligatoria</p>
+						</ion-text>
+					</form>
+				</div>
+			</ion-col>
+			<ion-col size-lg="3"></ion-col>
+		</ion-row>
+
+		<ion-row>
+			<ion-col size-lg="3"></ion-col>
+			<ion-col size-md="6" size-lg="6" size-xs="12">
+
+				<a style="color: #ffff;margin-left: 1.5em;" href="http://localhost/beAzzgo/public/forgot-password"> Password
+					dimenticata? </a>
+
+			</ion-col>
+			<ion-col size-lg="3"></ion-col>
+
+		</ion-row>
+
+		<ion-row>
+			<ion-col size-lg="3"></ion-col>
+			<ion-col size-md="6" size-lg="6" size-xs="12">
+
+				<ion-button (click)="onLogin(loginForm)" shape="round" color="light" expand="block">Login</ion-button>
+
+			</ion-col>
+			<ion-col size-lg="3"></ion-col>
+		</ion-row>
+
+
+		<ion-row>
+			<ion-col>
+				<div class="ion-text-center">
+					<h3>oppure registrati</h3>
+				</div>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size-lg="3"></ion-col>
+			<ion-col size-md="6" size-lg="6" size-xs="12">
+				<ion-button (click)="onSignup()" shape="round" color="secondary" expand="block">Registrati come cliente
+				</ion-button>
+			</ion-col>
+			<ion-col size-lg="3"></ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col size-lg="3"></ion-col>
+			<ion-col size-md="6" size-lg="6" size-xs="12">
+				<ion-button (click)="onSignupAgency()" shape="round" color="secondary" expand="block">Registrati come
+					professionista</ion-button>
+			</ion-col>
+			<ion-col size-lg="3"></ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<!-- TODO
+  <ion-item center>
+      Oppure continua con</ion-item>
+
+
+  <ion-button expand="block">
+    <ion-icon slot="start" name="logo-facebook"></ion-icon>
+    Facebook
+  </ion-button>
+
+-->
+</ion-content>

@@ -1,0 +1,45 @@
+<cfe-header [title]="title" [showCloseBtn]="true" [hidenotification]="true" (onCloseClick)="close()" [showMenuBtn]="false" [showBackBtn]="false"></cfe-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row justify-content-center>
+      <ion-col col-12>
+
+        <ion-list>
+          <ion-item>
+            <ion-label>{{product?.title}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>{{product?.description}}</ion-label>
+          </ion-item>
+          <ion-item-divider></ion-item-divider>
+          <ion-item>
+            <ion-label>Data</ion-label>
+            <ion-datetime [disabled]="showEnd"  displayFormat="DD/MM/YYYY" [(ngModel)]="data" placeholder="Scegli Data"></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label>Ora</ion-label>
+            <ion-datetime [disabled]="showEnd" display-format="HH:mm" picker-format="HH:mm" [(ngModel)]="hhmm"></ion-datetime>
+          </ion-item>
+          <ion-item *ngIf="showEnd">
+            <ion-label>Data Fine</ion-label>
+            <ion-datetime  displayFormat="DD/MM/YYYY" [(ngModel)]="dataEnd" placeholder="Scegli Data"></ion-datetime>
+          </ion-item>
+          <ion-item *ngIf="showEnd">
+            <ion-label>Ora Fine</ion-label>
+            <ion-datetime display-format="HH:mm" picker-format="HH:mm" [(ngModel)]="hhmmEnd"></ion-datetime>
+          </ion-item>
+        </ion-list>
+     
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button slot="start" (click)="retry()">ANNULLA</ion-button>
+    <ion-button slot="end" *ngIf="!showEnd" (click)="prenota()"> PRENOTA </ion-button>
+    <ion-button slot="end" *ngIf="showEnd" (click)="accettaPrenotazione()"> ACCETTA </ion-button>
+  </ion-toolbar>
+</ion-footer>

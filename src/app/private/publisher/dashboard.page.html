@@ -1,0 +1,68 @@
+<cfe-header [showBackBtn]="false" [title]="'Dashboard'"></cfe-header>
+
+<ion-item *ngIf="isThunderActive" color="primary" text-center padding routerLink="manage-thunder">
+	<ion-icon slot="start" name="flash-outline"></ion-icon>
+	Ci sono delle offerte speciali in programma, aderisci all'iniziativa caricando i tuoi prodotti
+	<ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+</ion-item>
+
+<ion-content [color]="colorService.selectedTheme">
+	<div class="back-image"
+		[ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+		<ion-grid fixed>
+			<ion-row>
+				<ion-col col-6>
+					<ion-card color="primary" class="dashboardcard" text-center padding routerLink="manage-ads">
+						<ion-icon class="dashboard" name="list-outline"></ion-icon>
+						<h2>Annunci</h2>
+					</ion-card>
+				</ion-col>
+				<ion-col col-6>
+					<ion-card color="primary" class="dashboardcard" text-center padding routerLink="richieste">
+						<ion-icon class="dashboard" name="reader-outline"></ion-icon>
+						<h2>Richieste</h2>
+					</ion-card>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col col-6>
+					<ion-card color="primary" class="dashboardcard" text-center padding routerLink="myfeedback">
+						<ion-icon class="dashboard" name="star-outline"></ion-icon>
+						<h2>Feedback</h2>
+					</ion-card>
+				</ion-col>
+				<ion-col col-6>
+					<ion-card color="primary" class="dashboardcard" text-center padding routerLink="profile">
+						<ion-icon class="dashboard" name="person-outline"></ion-icon>
+						<h2>Profilo</h2>
+					</ion-card>
+				</ion-col>
+			</ion-row>
+			<ion-row>
+
+				<ion-col col-6>
+					<ion-card color="primary" class="dashboardcard" text-center padding routerLink="notification">
+						<ion-icon class="dashboard" name="notifications-outline"></ion-icon>
+						<h2>Notifiche</h2>
+					</ion-card>
+				</ion-col>
+				<ion-col col-6>
+					<ion-card color="primary" class="dashboardcard" text-center padding (click)="goToSpedizioni()">
+						<ion-icon class="dashboard" name="notifications-outline"></ion-icon>
+						<h2>Spedizioni</h2>
+					</ion-card>
+				</ion-col>
+
+			</ion-row>
+			<ion-row>
+				<ion-col col-6 *ngIf="showCalendar">
+					<ion-card color="primary" class="dashboardcard" text-center padding routerLink="calendar">
+						<ion-icon class="dashboard" name="calendar-outline"></ion-icon>
+						<h2>Calendario</h2>
+					</ion-card>
+				</ion-col>
+
+			</ion-row>
+		</ion-grid>
+	</div>
+</ion-content>

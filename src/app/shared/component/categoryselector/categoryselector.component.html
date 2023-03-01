@@ -1,0 +1,7 @@
+<ion-row class="customRowClass">
+  <div class="categoryItem" [ngClass]="{'categoriaSelected': currentCategoria ==categoria.id}" *ngFor="let categoria of categorie">
+
+    <img  src="{{ categoria.img }}" (click)="itemClicked(categoria)" style="max-width:3.5rem;max-height:3.5rem;">
+  </div>
+</ion-row>
+

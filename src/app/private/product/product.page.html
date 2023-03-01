@@ -1,0 +1,123 @@
+<cfe-header [title]="'Dettaglio prodotto'"></cfe-header>
+
+
+<ion-content [color]="colorService.selectedTheme">
+  <div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item detail="false" lines="none" class="speaker-item"
+            routerLink="/app2/tabs/publisher-profile/{{product?.publisher.id}}">
+            <ion-avatar slot="start">
+              <img [src]="PublisherProfilePic" />
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ product?.publisher?.businessname }}</h2>
+              <p>{{ indirizzo }}</p>
+            </ion-label>
+
+            <ion-button *ngIf="current_role == 'Customer'" color="success" slot="end" (click)="whastapp()">
+
+              <ion-icon name="logo-whatsapp"></ion-icon>
+            </ion-button>
+            <!--TODO FROCIATE-->
+            <ion-badge *ngIf="false" class="inOffert" color="danger">OFFERTA <small>- 20 %</small> </ion-badge>
+          </ion-item>
+
+          <ion-slides pager="true" #slideWithNav>
+            <ion-slide>
+              <img [src]="enviromentPathimage + product?.mainphoto[0]?.path">
+              <!--
+            <ion-img-viewer title="Visualizza foto" [src]="enviromentPathimage + product?.mainphoto[0]?.path">
+            </ion-img-viewer>
+            -->
+            </ion-slide>
+            <ion-slide *ngFor="let p of product?.photos">
+              <img [src]="enviromentPathimage + p.path">
+              <!--
+            <ion-img-viewer title="Visualizza foto" [src]="enviromentPathimage + p.path">
+            </ion-img-viewer>
+            -->
+            </ion-slide>
+          </ion-slides>
+
+        </ion-col>
+
+      </ion-row>
+      <ion-row>
+        <ion-col size="11">
+          <h1> {{product?.title}}</h1>
+        </ion-col>
+        <ion-col size="1" *ngIf="current_role=='Customer'">
+          <h1>
+            <ion-icon (click)="favouriteClicked(product?.hasFavourite)" *ngIf="!product?.hasFavourite"
+              class="favouriteIco" name="heart-outline"></ion-icon>
+            <ion-icon (click)="favouriteClicked(product?.hasFavourite)" *ngIf="product?.hasFavourite" color="danger"
+              class="favouriteIco" name="heart"></ion-icon>
+          </h1>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <h6> {{product?.description}} </h6>
+
+      </ion-row>
+      <ion-item>
+        <ion-label>
+          <p>Valutazione </p>
+          <p *ngIf="avgFeedback">
+            <ionic5-star-rating #rating activeIcon="star" defaultIcon="star-outline" activeColor="#e9494f"
+              defaultColor="#aaaaaa" readonly="false" readonly="true" [rating]="avgFeedback" fontSize="32px">
+            </ionic5-star-rating>
+          </p>
+          <p *ngIf="!avgFeedback">
+            Ancora nessuna valutazione
+          </p>
+        </ion-label>
+        <!---->
+        <span *ngIf="current_role=='Customer'">
+          <ion-button slot="end" [disabled]="true" *ngIf="voted">Valutato</ion-button>
+          <ion-button slot="end" (click)="submitFeedBack()" *ngIf="!voted">Valuta</ion-button>
+          <ion-button slot="end" (click)="addItem(product)">Richiedi</ion-button>
+        </span>
+      </ion-item>
+
+
+    </ion-grid>
+    <ion-segment (ionChange)="segmentChanged($event.target.value)" [value]="tabActive">
+      <ion-segment-button value="product" *ngIf="current_role=='Customer'">
+        <ion-label>Altre Offerte</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="feedback">
+        <ion-label>Feedback</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <span *ngIf="tabActive=='product'">
+      <ion-grid fixed>
+        <span *ngFor="let product of productsOffer">
+          <azz-product-item [addTocart]="true" (onSendItem)="addItem($event)" [product]="product">
+          </azz-product-item>
+        </span>
+      </ion-grid>
+      <cfe-pagination *ngIf="nextNumber" (onNext)="moreItem($event)" [numberNextItem]="nextNumber"></cfe-pagination>
+    </span>
+    <span *ngIf="tabActive=='feedback'">
+      <ion-grid fixed>
+        <ion-list *ngIf="feedbacks.length>0">
+          <ion-item class="user-item" *ngFor="let feedback of feedbacks;let i = index">
+            <ion-label>
+              <p><b>{{feedback.reviewerinfo.name}}</b> - ha valutato</p>
+              <ionic5-star-rating #rating activeIcon="star" defaultIcon="star-outline" activeColor="#e9494f"
+                defaultColor="#aaaaaa" readonly="false" readonly="true" [rating]="feedback.value" fontSize="32px">
+              </ionic5-star-rating>
+            </ion-label>
+
+          </ion-item>
+        </ion-list>
+      </ion-grid>
+      <cfe-pagination *ngIf="nextNumberFeedback" (onNext)="moreItemFeedback($event)"
+        [numberNextItem]="nextNumberFeedback">
+      </cfe-pagination>
+    </span>
+  </div>
+</ion-content>

@@ -1,0 +1,44 @@
+<cfe-header [title]="'Annunci'"></cfe-header>
+
+<ion-content [color]="colorService.selectedTheme">
+  <div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+    
+      <ion-list-header [color]="colorService.selectedTheme">
+        I tuoi annunci
+      </ion-list-header>
+      <ion-grid fixed>
+        <span *ngIf="ads.length==0">
+          <ion-row style="margin-top:15px;">
+            <ion-col style="text-align:center;">Nessun annuncio pubblicato</ion-col>
+          </ion-row>
+          <ion-row style="display:flex;justify-content:center;">
+            <img src="assets/img/Nodata.png" alt="img" />
+          </ion-row>
+        </span>
+        <ion-list *ngIf="ads.length>0">
+        <ion-item *ngFor="let ad of ads; let i = index">
+          <ion-avatar slot="start">
+            <img [src]="this.enviromentPath + ad.mainphoto[0]?.path">
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ad.title}}</h2>
+            <p>{{ad.description}}</p>
+            <p>{{ad.price}}</p>
+          </ion-label>
+          <ion-icon slot="end" name="pencil-outline" routerLink="editads/{{ad.id}}"></ion-icon>
+          <ion-icon slot="end" name="trash-outline" (click)="delete(ad.id,i)"></ion-icon>
+          <ion-icon slot="end" name="share-social-outline" (click)="share(ad.id,ad.title)"></ion-icon>
+          <ion-icon slot="end" name="rocket-outline" (click)="soonAvailable()"></ion-icon>
+        </ion-item>
+      </ion-list>
+      </ion-grid>
+    
+
+    <cfe-pagination *ngIf="nextNumber" (onNext)="moreItem($event)" [numberNextItem]="nextNumber"></cfe-pagination>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-button routerLink="ads" expand="full">Nuovo Annuncio</ion-button>
+</ion-footer>

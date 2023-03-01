@@ -1,0 +1,28 @@
+<ion-item [ngClass]="{'inOffertPost': product.offer?.isactive}">
+    <ion-thumbnail slot="start" (click)="goToProductPage(product.id)">
+        <img [src]=" image" />
+    </ion-thumbnail>
+    <ion-label (click)="goToProductPage(product.id)">
+        <h3>{{product.title}}</h3>
+        <p>{{product.description}}</p>
+        <p>
+            <ion-badge *ngIf="product.offer?.isactive" class="inOffert" color="danger">OFFERTA <small>
+                    {{product.offer?.percent}} %</small> </ion-badge>
+        </p>
+    </ion-label>
+    <ion-icon name="trash-outline" (click)="delete(product)" *ngIf="edit"></ion-icon>
+    <ion-note *ngIf="!product.offer?.isactive" slot="end">
+        <p>€ {{product.price}} 
+        {{product.offer?.price}}</p>
+        <ion-button *ngIf="addTocart" (click)="addItem(product)">Richiedi</ion-button>
+    </ion-note>
+    <ion-note *ngIf="product.offer?.isactive" slot="end">
+       
+       <p> <span class="textOfferNo">€ {{product.price}}</span>
+        <span>€ {{product.offer?.price}}</span>
+       </p>
+        <ion-button style="margin-left: 2em;" *ngIf="addTocart" (click)="addItem(product)">Richiedi</ion-button>
+    </ion-note>
+    
+   
+</ion-item>

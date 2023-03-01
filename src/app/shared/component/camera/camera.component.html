@@ -1,0 +1,11 @@
+<ion-item>
+	<ion-label>{{ label }}</ion-label>
+
+	<ion-icon *ngIf="mode == 'mobile'" class="ion-margin-end" (click)="choosePhoto()" name="images-outline"></ion-icon>
+	<ion-icon *ngIf="mode == 'mobile'" name="camera-outline" (click)="takePhoto()"></ion-icon>
+
+	<span *ngIf="mode == 'web'">
+		<input [hidden]="true" type="file" #fileInput (change)="fileEvent($event)" />
+		<ion-button (click)="fileInput.click()">Scegli</ion-button>
+	</span>
+</ion-item>

@@ -1,0 +1,20 @@
+<cfe-header (onCloseClick)="retry()" [showCloseBtn]="true" [showMenuBtn]="false" [showBackBtn]="false" [title]="'Lascia un Feedback'"></cfe-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row justify-content-center>
+      <ion-col col-12>
+        <ionic5-star-rating #rating activeIcon="star" defaultIcon="star-outline" activeColor="#e9494f"
+          defaultColor="#aaaaaa" readonly="false" [rating]="value" fontSize="32px" (ratingChanged)="logRatingChange($event)">
+        </ionic5-star-rating>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button slot="start" (click)="retry()">ANNULLA</ion-button>
+    <ion-button slot="end" (click)="submitFeedBack()"> MODIFICA </ion-button>
+  </ion-toolbar>
+</ion-footer>

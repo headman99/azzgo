@@ -1,0 +1,58 @@
+<ion-card [ngClass]="{'inOffertPost': itemPost.offer?.isactive}">
+	<ion-item detail="false" lines="none" class="speaker-item" (click)="publisherClick()">
+		<ion-avatar slot="start">
+			<img [src]="PublisherProfilePic" [alt]="itemPost.name + ' profile picture'" />
+		</ion-avatar>
+		<ion-label>
+			<h2>{{ itemPost.publisher.businessname }}</h2>
+			<p>{{ indirizzo }}</p>
+        </ion-label>
+		<!--TODO FROCIATE-->
+        <ion-badge *ngIf="itemPost.offer?.isactive" class="inOffert" color="danger">OFFERTA <small> {{itemPost.offer?.percent}} %</small>  </ion-badge>
+	</ion-item>
+
+	<ion-row (click)="productClick()" class="ion-justify-content-center">
+		<img [src]="mainItemPic"  class="imgUpload" [alt]="itemPost.name + ' profile picture'" />
+	</ion-row>
+
+	<ion-card-header >
+		<ion-card-title
+			>
+			<ion-icon (click)="productClick()" name="calendar-outline" *ngIf="itemPost.type == 'SRV'"></ion-icon>
+			<ion-icon (click)="productClick()" name="bag-outline" *ngIf="itemPost.type == 'PRD'"></ion-icon>
+			<span (click)="productClick()">{{itemPost.title}} </span>
+			
+            <ion-icon (click)="markFavourite()" *ngIf="!itemPost.isfavourite"   class="favouriteIco" name="heart-outline"></ion-icon>
+			<ion-icon (click)="markUnfavourite()" *ngIf="itemPost.isfavourite" color="danger"  class="favouriteIco" name="heart"></ion-icon>
+        </ion-card-title>
+
+	</ion-card-header>
+	<ion-card-content (click)="productClick()">
+		{{itemPost.description}} 
+	</ion-card-content>
+	<ion-toolbar class="toolbarAdjustment">
+		<ion-button color="success"  (click)="whastappClick()">
+				
+			<ion-icon name="logo-whatsapp"></ion-icon>
+			Chatta
+		</ion-button>
+		    <!--rimozione chat--
+			<ion-button  (click)="chatta()">
+				
+				Chatta
+			</ion-button>
+		-->
+			<ion-button color="primary"  (click)="addItemTolist(itemPost)">
+				 Richiedi
+			</ion-button>
+			<ion-label *ngIf="!itemPost.offer?.isactive" slot="end" 
+				>€ {{itemPost.price}}
+				{{itemPost.offer?.price}}
+			</ion-label>
+			<ion-label *ngIf="itemPost.offer?.isactive" slot="end" >
+				<p class="textOfferNo">€ {{itemPost.price}}</p>
+				<p >€ {{itemPost.offer?.price}}</p>
+			</ion-label>
+		
+	</ion-toolbar>
+</ion-card>

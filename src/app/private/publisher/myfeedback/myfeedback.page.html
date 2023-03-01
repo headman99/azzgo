@@ -1,0 +1,31 @@
+<cfe-header [title]="'Feedback ricevuti'"></cfe-header>
+<ion-content [color]="colorService.selectedTheme">
+    <div class="back-image"
+        [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+        <ion-grid fixed>
+            <span *ngIf="feedbacks.length==0">
+                <ion-row style="margin-top:15px;">
+                    <ion-col style="text-align:center;">Nessun feedback da visualizzare</ion-col>
+                </ion-row>
+                <ion-row style="display:flex;justify-content:center;">
+                    <img src="assets/img/Nodata.png" alt="img" />
+                </ion-row>
+            </span>
+            <ion-list *ngIf="feedbacks.length>0">
+                <ion-item class="user-item" *ngFor="let feedback of feedbacks;let i = index">
+                    <ion-label>
+                        <p><b>{{feedback.reviewerinfo.name}}</b> - ha valutato</p>
+                        <ionic5-star-rating #rating activeIcon="star" defaultIcon="star-outline" activeColor="#e9494f"
+                            defaultColor="#aaaaaa" readonly="false" readonly="true" [rating]="feedback.value"
+                            fontSize="32px">
+                        </ionic5-star-rating>
+                    </ion-label>
+
+                </ion-item>
+            </ion-list>
+        </ion-grid>
+        <cfe-pagination *ngIf="nextNumberFeedback" (onNext)="moreItemFeedback($event)"
+            [numberNextItem]="nextNumberFeedback">
+        </cfe-pagination>
+    </div>
+</ion-content>

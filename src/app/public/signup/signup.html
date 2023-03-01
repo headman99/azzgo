@@ -1,0 +1,57 @@
+<cfe-header [hidenotification]="true" [showCloseBtn]="false" [showMenuBtn]="false" [showBackBtn]="true" [title]="'Registrazione'"></cfe-header>
+
+<ion-content>
+  <div class="login-logo">
+    <img src="assets/img/appicon.png" alt="Ionic logo">
+  </div>
+  <form #f="ngForm" (ngSubmit)="register(f)" >
+   
+    <ion-grid fixed>
+      <ion-row center>
+        <ion-col size-md="3" size-lg="1" size-xs="0"></ion-col>
+        <ion-col align-self-center size-md="6" size-lg="10" size-xs="12">
+          <div padding>
+            <ion-item>
+              <ion-input name="name" type="text" placeholder="Nickname" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="email" type="email" placeholder="latuaemail@email.com" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="phone" type="text" pattern="^[0-9]*$" placeholder="Telefono" ngModel required>
+              </ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="password" [type]="passwordType"  placeholder="Password" ngModel required></ion-input>
+              <ion-icon *ngIf="passwordType =='password'"  (click)="changeType()" name="eye-outline" slot="end"></ion-icon>
+								<ion-icon  *ngIf="passwordType =='text'"  (click)="changeType()" slot="end" name="eye-off-outline"></ion-icon>
+					
+            </ion-item>
+            <app-passoword-strength-bar (infoClicked)="onClickPasswordReq()" [passwordToCheck]="f.value.password"
+              [barLabel]="'Sicurezza password'"></app-passoword-strength-bar>
+            <ion-item>
+              <ion-input name="confirm" type="password" placeholder="Conferma Password" ngModel required></ion-input>
+            </ion-item>
+            <ion-item (click)="onclickterms()">
+              <ion-label class="ion-text-wrap">Ai sensi dell’art. 13 del Regolamento UE 679/2016 GDPR ho preso visione
+                dell’informativa.</ion-label>
+              <ion-icon *ngIf="!terms" slot="start" name="square-outline"></ion-icon>
+              <ion-icon *ngIf="terms" slot="start" name="checkbox-outline"></ion-icon>
+            </ion-item>
+          </div>
+        </ion-col>
+        <ion-col size-md="3" size-lg="1" size-xs="0"></ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-md="6" size-lg="9" size-xs="0" class="ion-hide"></ion-col>
+        <ion-col size-md="6" size-lg="2" size-xs="12">
+          <ion-button type="submit" [disabled]="false" type="submit" expand="block">Registrati
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+
+
+</ion-content>

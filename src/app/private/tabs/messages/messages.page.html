@@ -1,0 +1,15 @@
+<cfe-header [showBackBtn]="false" [title]="'Messaggi'"></cfe-header>
+
+<ion-content>
+	<ion-list>
+		<ion-item class="user-item" *ngFor="let user of userList;let i = index" routerLink="/chat/{{i}}">
+            <ion-avatar slot="start">
+                <img [src]="user.profilePic" [alt]="user.name + ' user picture'">
+              </ion-avatar>
+              <ion-label>
+                <p><b>{{user.name}}</b> - Per l'annuncio xxxx</p>
+              </ion-label>
+
+		</ion-item>
+	</ion-list>
+</ion-content>

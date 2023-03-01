@@ -1,0 +1,37 @@
+<cfe-header [title]="'Account'"></cfe-header>
+
+
+<ion-content [color]='colorService.selectedTheme'>
+  <div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+    <div *ngIf="username" class="ion-padding-top ion-text-center">
+      <img [src]="imgURL" alt="avatar">
+      <h2>{{username}}</h2>
+
+      <ion-grid fixed>
+        <cfe-camera [mode]="cameramode" [label]="'Scegli foto profilo'" (onTakePhoto)="PhotoCaptured($event)">
+        </cfe-camera>
+        <ion-item [hidden]="true" (click)="changeUsername()">Change Username</ion-item>
+        <ion-item [hidden]="true" (click)="changePassword()">Change Password</ion-item>
+        <ion-item [hidden]="true" (click)="support()">Support</ion-item>
+        <ion-item (click)="logout()">Logout</ion-item>
+
+
+
+        <ion-item *ngFor="let contact of contacts">
+
+          <ion-icon *ngIf="contact.typecode==='PNE'" style="margin-right: 1em;" name="call-outline"></ion-icon>
+          <ion-icon *ngIf="contact.typecode==='ADR'" style="margin-right: 1em;" name="location-outline">
+          </ion-icon>
+          <ion-icon *ngIf="contact.typecode==='EMA'" style="margin-right: 1em;" name="mail-outline"></ion-icon>
+          {{contact.value}}
+          <ion-icon *ngIf="contact.typecode !=='EMA'" slot="end" name="pencil-outline" (click)="editContact(contact)">
+          </ion-icon>
+        </ion-item>
+        <ion-button *ngIf='showAddPhone' (click)='addContact()'>Aggiungi Telefono</ion-button>
+      </ion-grid>
+    </div>
+  </div>
+
+
+</ion-content>

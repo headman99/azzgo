@@ -1,0 +1,122 @@
+<cfe-header [title]="'Profilo'"></cfe-header>
+<ion-item>
+    <ion-avatar slot="start">
+        <img [src]="enviromentPathimage + publisher?.mainphoto[0]?.path" />
+    </ion-avatar>
+    <ion-label>
+        <h2>{{publisher?.businessname}}</h2>
+        <p>
+            <ion-icon name="location"></ion-icon> {{address?.value}}
+        </p>
+    </ion-label>
+    <ion-button *ngIf="current_role == 'Customer'" color="success" slot="end"  (click)="whastapp()">
+				
+        <ion-icon name="logo-whatsapp"></ion-icon>
+    </ion-button>
+</ion-item>
+<ion-item>
+    <ion-label>
+         Seguaci: {{countFollower}}
+    </ion-label>
+    <ion-button slot="end" (click)="follow()" *ngIf="current_role=='Customer' && !followed">
+        segui
+    </ion-button>
+    <ion-button slot="end" (click)="unFollow()" *ngIf="current_role=='Customer' && followed">
+        non seguire più
+    </ion-button>
+</ion-item>
+
+<ion-item>
+    <ion-label>
+        <p>Valutazione </p>
+        <p *ngIf="avgFeedback">
+            <ionic5-star-rating #rating activeIcon="star" defaultIcon="star-outline" activeColor="#e9494f"
+                defaultColor="#aaaaaa" readonly="false" readonly="true" [rating]="avgFeedback" fontSize="32px">
+            </ionic5-star-rating>
+        </p>
+        <p *ngIf="!avgFeedback">
+            Ancora nessuna valutazione
+        </p>
+    </ion-label>
+    <ion-button slot="end" [disabled]="true" *ngIf="current_role == 'Customer' && voted">Valutato</ion-button>
+    <ion-button slot="end" (click)="submitFeedBack()" *ngIf="current_role == 'Customer' && !voted">Valuta</ion-button>
+</ion-item>
+<ion-segment (ionChange)="segmentChanged($event.target.value)" [value]="tabActive">
+    <ion-segment-button value="product">
+        <ion-label>Prodotti</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="feedback">
+        <ion-label>Feedback</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="contacts">
+        <ion-label>Contatti</ion-label>
+    </ion-segment-button>
+</ion-segment>
+
+<ion-content class="speaker-detail" [color]="colorService.selectedTheme">
+    <div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+    <span *ngIf="tabActive=='product'">
+        <ion-searchbar *ngIf="current_role == 'Customer'" showCancelButton="focus" placeholder='Carca' (change)="searchProductByStore($event)" (ionCancel)="getProducts()"></ion-searchbar>
+        <ion-grid fixed>
+            <span *ngIf="products.length==0">
+                <ion-row style="margin-top:15px;">
+                    <ion-col style="text-align:center;">Ancora nessun prodotto</ion-col>
+                </ion-row>
+                <ion-row style="display:flex;justify-content:center;">
+                <img src="assets/img/Nodata.png" alt="img" />
+            </ion-row>
+            </span>
+            <span *ngFor="let product of products">
+                <azz-product-item [addTocart]="current_role == 'Customer'" (onGoTOProductPage)="goToProductPage($event)" (onSendItem)="addItem($event)" [product]="product">
+                </azz-product-item>
+            </span>
+        </ion-grid>
+        <cfe-pagination *ngIf="nextNumber" (onNext)="moreItem($event)" [numberNextItem]="nextNumber"></cfe-pagination>
+    </span>
+    <span *ngIf="tabActive=='feedback'">
+        <ion-grid fixed>
+            <span *ngIf="feedbacks.length==0">
+                <ion-row style="margin-top:15px;">
+                    <ion-col style="text-align:center;">Ancora nessun feedback</ion-col>
+                </ion-row>
+                <ion-row style="display:flex;justify-content:center;">
+                <img src="assets/img/Nodata.png" alt="img" />
+            </ion-row>
+            </span>
+            <ion-list *ngIf="feedbacks.length>0">
+                <ion-item class="user-item" *ngFor="let feedback of feedbacks;let i = index">
+                    <ion-label>
+                        <p><b>{{feedback.reviewerinfo.name}}</b> - ha valutato</p>
+                        <ionic5-star-rating #rating activeIcon="star" defaultIcon="star-outline" activeColor="#e9494f"
+                            defaultColor="#aaaaaa" readonly="false" readonly="true" [rating]="feedback.value"
+                            fontSize="32px">
+                        </ionic5-star-rating>
+                    </ion-label>
+
+                </ion-item>
+            </ion-list>
+        </ion-grid>
+        <cfe-pagination *ngIf="nextNumberFeedback" (onNext)="moreItemFeedback($event)" [numberNextItem]="nextNumberFeedback">
+        </cfe-pagination>
+    </span>
+
+
+    <ion-list *ngIf="tabActive=='contacts'">
+        <ion-grid fixed>
+            <ion-item *ngFor="let contact of publisher?.contacts" (click)="actionContact(contact)">
+
+                <ion-icon *ngIf="contact.typecode==='PNE'" style="margin-right: 1em;" name="call-outline"></ion-icon>
+                <ion-icon *ngIf="contact.typecode==='ADR'" style="margin-right: 1em;" name="location-outline">
+                </ion-icon>
+                <ion-icon *ngIf="contact.typecode==='EMA'" style="margin-right: 1em;" name="mail-outline"></ion-icon>
+                {{contact.value}}
+                <ion-icon *ngIf="contact.typecode !=='EMA' && current_role != 'Customer'" slot="end"
+                    name="pencil-outline" (click)="editContact(contact)"></ion-icon>
+            </ion-item>
+        </ion-grid>
+    </ion-list>
+
+    </div>
+
+</ion-content>

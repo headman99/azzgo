@@ -1,0 +1,34 @@
+<cfe-header [title]="'Offerte speciali'"></cfe-header>
+
+
+<ion-item color="primary" *ngIf="thunderDeals">
+
+
+  {{thunderDeals?.title}}
+  dal {{thunderDeals?.startdate}} al {{thunderDeals?.enddate}}
+</ion-item>
+
+<ion-content [color]="colorService.selectedTheme">
+  <div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+
+    <ion-grid fixed>
+      <ion-list *ngIf="products.length>0">
+        <ion-list-header>
+          Prodotti aggiunti a questo evento di offerta
+        </ion-list-header>
+        <span *ngFor="let product of products">
+          <azz-product-item [addTocart]="false" (onSendItem)="addItem($event)" [product]="product">
+          </azz-product-item>
+        </span>
+
+      </ion-list>
+      <ion-text *ngIf="products.length==0">Non hai nessun prodotto per questo evento di offerta</ion-text>
+    </ion-grid>
+    <cfe-pagination *ngIf="nextNumber" (onNext)="moreItem($event)" [numberNextItem]="nextNumber"></cfe-pagination>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-button (click)="openSelectAds()" expand="full">Seleziona un Annuncio</ion-button>
+</ion-footer>

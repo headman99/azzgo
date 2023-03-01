@@ -1,0 +1,25 @@
+<cfe-header [title]="'Gestione ThunderDeals'"></cfe-header>
+<ion-content [color]='colorService.selectedTheme'>
+  <div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+    <span *ngIf="thunderDealsList.length==0">
+      <ion-row style="margin-top:15px;">
+        <ion-col style="text-align:center;">Non ci sono thundeals</ion-col>
+      </ion-row>
+      <ion-row style="display:flex;justify-content:center;">
+        <img src="assets/img/Nodata.png" alt="img" />
+      </ion-row>
+    </span>
+    <ion-list *ngIf="thunderDealsList.length>0">
+      <ion-item *ngFor="let thunder of thunderDealsList">
+        <ion-label>{{thunder.title}}</ion-label>
+        <ion-icon routerLink="thunder-deal/{{thunder.id}}" name="eye-outline" slot="end"></ion-icon>
+      </ion-item>
+    </ion-list>
+    <cfe-pagination *ngIf="nextNumber" (onNext)="moreItem($event)" [numberNextItem]="nextNumber"></cfe-pagination>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-button routerLink="create-thunder-deal" expand="full">Nuovo ThunderDeals</ion-button>
+</ion-footer>

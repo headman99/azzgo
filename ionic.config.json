@@ -1,0 +1,11 @@
+{
+  "name": "AzzGo",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "proxies":[ {
+    "path": "/",
+    "proxyUrl": "http://localhost/"
+  }]
+}

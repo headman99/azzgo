@@ -1,0 +1,35 @@
+<cfe-header [title]="'Notifiche'" [hidenotification]="true"></cfe-header>
+<ion-item *ngIf="notifications.length > 0">
+  <ion-button slot="end" (click)="markAll()">segna tutto come letto</ion-button>
+</ion-item>
+
+<ion-content [color]="colorService.selectedTheme">
+  <div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+    <ion-list>
+      <ion-item *ngFor="let not of notifications; index as i">
+        {{not.title}} {{not.description}}
+
+        <ion-icon (click)="goToAction(not)" slot="end" name="arrow-forward-outline"></ion-icon>
+        <ion-icon slot="end" *ngIf="!not.isread" name="eye-outline" (click)="markAsRead(not)">segna come letto
+        </ion-icon>
+      </ion-item>
+      <cfe-pagination *ngIf="nextNumber" (onNext)="moreItem($event)" [numberNextItem]="nextNumber"></cfe-pagination>
+    </ion-list>
+
+    <ion-row *ngIf="notifications.length == 0">
+      <ion-col size="12" size-md="6">
+        In questa sezione puoi visualizzare le notifiche ricevute!
+      </ion-col>
+    </ion-row>
+
+    <ion-row style="margin-top: 20px;">
+      <ion-row style="display: flex;justify-content: center;width: 100%;">
+        Nessuna notifica da visualizzare al momento
+      </ion-row>
+      <ion-row style="display: flex;justify-content: center;width: 100%;">
+        <img src="assets/img/Nodata.png" alt="img" />
+      </ion-row>
+    </ion-row>
+  </div>
+</ion-content>

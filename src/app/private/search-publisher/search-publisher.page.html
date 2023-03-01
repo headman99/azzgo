@@ -1,0 +1,35 @@
+<cfe-header [showMenuBtn]="false" [title]="'Cerca il tuo store di fiducia'"></cfe-header>
+
+<ion-content [color]="colorService.selectedTheme">
+  <div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+    <ion-card *ngFor="let category of categories" text-center padding routerLink="pulisher-result/{{category.code}}">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col col-2>
+            <ion-icon class="dashboard" name="fast-food-outline" *ngIf="category.code =='FOD'"></ion-icon>
+            <ion-icon class="dashboard" name="pricetags-outline" *ngIf="category.code =='SHP'"></ion-icon>
+            <ion-icon class="dashboard" src="/assets/img/custom_ico/handshake-regular.svg"
+              *ngIf="category.code =='SRV'"></ion-icon>
+          </ion-col>
+          <ion-col col-12>
+            <h2>{{ category.description }}</h2>
+          </ion-col>
+
+        </ion-row>
+
+
+      </ion-grid>
+    </ion-card>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="6">
+          Cliccando su una categoria puoi trovare lo store che stai cercando!
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+</ion-content>

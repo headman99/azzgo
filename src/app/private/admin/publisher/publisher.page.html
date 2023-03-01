@@ -1,0 +1,41 @@
+<cfe-header [title]="'Richiesta Registrazione'"></cfe-header>
+<ion-content [color]="colorService.selectedTheme">
+	<div class="back-image"
+		[ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+		<ion-grid *ngIf="publisher">
+			<ion-row justify-content-center>
+				<ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+					<div padding>
+						<ion-item>
+							<ion-label>Ragione Sociale</ion-label> {{publisher.businessname}}
+						</ion-item>
+						<ion-item>
+							<ion-label>Nick Azzgo</ion-label> {{publisher.nickname}}
+						</ion-item>
+						<ion-item>
+							<ion-label>P.iva</ion-label> {{publisher.vatnumber}}
+						</ion-item>
+						<ion-item>Contatti:</ion-item>
+						<ion-item *ngFor="let contact of publisher.contacts">
+
+							<ion-icon *ngIf="contact.typecode==='PNE'" style="margin-right: 1em;" name="call-outline">
+							</ion-icon>
+							<ion-icon *ngIf="contact.typecode==='ADR'" style="margin-right: 1em;"
+								name="location-outline"></ion-icon>
+							<ion-icon *ngIf="contact.typecode==='EMA'" style="margin-right: 1em;" name="mail-outline">
+							</ion-icon>
+							{{contact.value}}
+						</ion-item>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
+</ion-content>
+<ion-footer>
+	<ion-toolbar>
+		<ion-button *ngIf="!publisher?.isactive" slot="start" (click)="delete()">ELIMINA</ion-button>
+		<ion-button *ngIf="!publisher?.isactive" slot="end" (click)="activate()"> ATTIVA </ion-button>
+		<ion-button *ngIf="publisher?.isactive" slot="end" (click)="disactive()"> DISATTIVA </ion-button>
+	</ion-toolbar>
+</ion-footer>

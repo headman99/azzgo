@@ -1,0 +1,80 @@
+<cfe-header [showBackBtn]="false" [title]="'I miei Preferiti'"></cfe-header>
+<ion-segment (ionChange)="segmentChanged($event.target.value)" [value]="tabActive">
+	<ion-segment-button value="stores">
+		<ion-label>STORES</ion-label>
+	</ion-segment-button>
+	<ion-segment-button value="annunci">
+		<ion-label>ANNUNCI</ion-label>
+	</ion-segment-button>
+</ion-segment>
+<ion-content [color]="colorService.selectedTheme">
+	<div class="back-image"
+		[ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+		<span *ngIf="tabActive=='stores'">
+			<ion-grid fixed>
+				<ion-row>
+					<ion-col size="12" *ngFor="let publisher of followed">
+						<ion-item>
+							<ion-avatar (click)="goToPub(publisher.id)" slot="start">
+								<img [src]="enviromentPathimage + publisher?.mainphoto[0]?.path" />
+							</ion-avatar>
+							<ion-label (click)="goToPub(publisher.id)">
+								<h2>{{publisher?.businessname}}</h2>
+							</ion-label>
+							<ion-button slot="end" (click)="follow(publisher)" *ngIf="!publisher.followed">
+								segui
+							</ion-button>
+							<ion-button slot="end" (click)="unFollow(publisher)" *ngIf="publisher.followed">
+								non seguire più
+							</ion-button>
+
+						</ion-item>
+					</ion-col>
+				</ion-row>
+				<ion-row *ngIf="followed.length == 0">
+					<ion-col size="12" size-md="6">
+						Seleziona i tuo negozi preferiti e resta sempre aggiornato su tutte le novità e le offerte.
+
+					</ion-col>
+					<ion-col size="12" size-md="12" class="gif_col">
+						<div class="gif_container">
+							<img src="assets/gif/azz_1.gif" alt="Gif" class="gif"/>
+						</div>
+						
+					</ion-col>
+
+				</ion-row>
+			</ion-grid>
+			<cfe-pagination *ngIf="nextNumberFollowed" (onNext)="morefollowed($event)"
+				[numberNextItem]="nextNumberFollowed"></cfe-pagination>
+
+		</span>
+
+		<span *ngIf="tabActive=='annunci'">
+			<ion-grid fixed>
+				<ion-row>
+					<ion-col size="12" size-md="6" *ngFor="let post of products">
+						<post [itemPost]="post" (onChattaClick)="goTochat(post.publisher.id)"
+							(goToProductDetails)="goToProductPage(post.id)"
+							(goToProfilePub)="goToPub(post.publisher.id)" (onAddItemTolist)="addItem($event)"></post>
+					</ion-col>
+				</ion-row>
+				<ion-row *ngIf="products.length == 0">
+					<ion-col size="12" size-md="6">
+						Seleziona i tuo negozi preferiti, potrai costantemente verificarne la disponibilità e riceverai
+						notifiche sugli sconti applicati!
+
+					</ion-col>
+					<ion-col size="12" size-md="12" class="gif_col">
+						<div class="gif_container">
+							<img src="assets/gif/azz_3.gif" alt="Gif" class="gif"/>
+						</div>
+						
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+			<cfe-pagination *ngIf="nextNumber" (onNext)="moreItem($event)" [numberNextItem]="nextNumber">
+			</cfe-pagination>
+		</span>
+	</div>
+</ion-content>

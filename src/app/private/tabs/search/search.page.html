@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-text style="margin-left: 1em;" *ngIf="!ios && !showSearchbar">AzzGo
+      <small (click)="openSearchSetting()">
+        <ion-icon name="location"></ion-icon> 
+        <ion-text *ngIf="filterSearch?.address">{{filterSearch?.address}}</ion-text>
+      </small>
+    </ion-text>
+
+
+    <ion-searchbar *ngIf="showSearchbar" showCancelButton="always" [(ngModel)]="queryText"
+      (ionCancel)="showSearchbar = false" placeholder="Search"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!ios && !showSearchbar" (click)="openSearchSetting()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+      <ion-button (click)=goSearchPublisher()>
+        <ion-icon src="/assets/img/custom_ico/store-alt-solid.svg"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="ios && !showSearchbar" (click)="presentFilter()">
+        <span *ngIf="ios">Filter</span>
+      </ion-button>
+      <ion-button *ngIf="!showSearchbar" (click)="goToNotification()">
+        <ion-icon size="large" name="notifications-outline">
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-text *ngIf="false"><small>{{filterSearch?.categoryid ? filterSearch?.categoryid : 'Tutte le categorie' }} </small>
+  > {{filterSearch?.testo}}</ion-text>
+
+<ion-item color="primary" *ngIf="thunderDeals" (click)="goToThunderPage(thunderDeals)">
+  <ion-icon slot="start" name="flash-outline"></ion-icon>
+  <ion-label>
+    <h2>{{thunderDeals.title}}</h2>
+    <p>dal {{thunderDeals.startdate}} al {{thunderDeals.enddate}}</p>
+  </ion-label>
+  <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+</ion-item>
+
+<ion-content [color]="colorService.selectedTheme">
+  <div class="back-image" [ngStyle] = "{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12" size-md="6" *ngFor="let post of products">
+          <post (onWhastappClick)="whastapp($event)" [itemPost]="post" (favouriteClick)="favouriteClicked($event, post)"
+            (onChattaClick)="goTochat(post.publisher.id)" (goToProductDetails)="goToProductPage(post.id)"
+            (goToProfilePub)="goToPub(post.publisher.id)" (onAddItemTolist)="addItem($event)"></post>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="products.length == 0">
+        <ion-col size="12" size-md="6" style="text-align:center">
+          Nessun risultato per i parametri di ricerca
+          <ion-row style="display:flex;justify-content:center;">
+            <img src="assets/img/Nodata.png" alt="img" />
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <cfe-pagination *ngIf="nextNumber" (onNext)="moreItem($event)" [numberNextItem]="nextNumber"></cfe-pagination>
+  </div>
+</ion-content>

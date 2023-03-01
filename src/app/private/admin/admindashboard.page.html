@@ -1,0 +1,39 @@
+<cfe-header [showBackBtn]="false" [title]="'Amministrazione'"></cfe-header>
+
+<ion-content [color]='colorService.selectedTheme'>
+    <div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+    <ion-grid>
+        <ion-row>
+            <ion-col col-12 routerLink="manage-publishers">
+                <ion-card color="primary" class="dashboardcard" text-center padding>
+                    <ion-icon class="dashboard" name="receipt-outline"></ion-icon>
+                    <h2>Richieste Registrazioni</h2>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        
+        <ion-col col-12 routerLink="manage-active-publisher">
+            <ion-card color="primary" class="dashboardcard" text-center padding>
+                <ion-icon class="dashboard" name="people"></ion-icon>
+                <h2>Gestione Utenti Attivi</h2>
+            </ion-card>
+        </ion-col>
+        <ion-col col-12 routerLink="manage-thunder-deals">
+            <ion-card color="primary" class="dashboardcard" text-center padding>
+                <ion-icon class="dashboard" name="flash-outline"></ion-icon>
+                <h2>Gestione ThunderDeals</h2>
+            </ion-card>
+        </ion-col>
+
+        <ion-col col-12 >
+            <ion-card color="primary" class="dashboardcard" text-center padding routerLink="notification">
+                <ion-icon class="dashboard" name="notifications-outline"></ion-icon>
+                <h2>Notifiche</h2>
+            </ion-card>
+        </ion-col>
+    
+    </ion-grid>
+    </div>
+</ion-content>

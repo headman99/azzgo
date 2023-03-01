@@ -1,0 +1,12 @@
+  {
+    "/proxy": {
+       "target":  {
+         "host": "localhost",
+         "protocol": "http:"
+       },
+       "secure": false,
+       "changeOrigin": true,
+       "logLevel": "info",
+       "pathRewrite": {"^/proxy" : ""}
+    }
+  }

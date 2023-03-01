@@ -1,0 +1,27 @@
+.login-logo {
+   text-align: center;
+}
+
+.list {
+  margin-bottom: 0;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: --ion-color-primary-contrast;
+  --color: --ion-color-primary-contrast;
+  --highlight-color-focused: yellow;
+}
+
+ion-label{
+    --color:(--ion-color-primary-contrast);
+    
+}
+
+ion-row.b-primary{
+  background: var(--ion-color-primary);
+}
+
+ion-item.item-has-focus > ion-label{
+    color:var(--ion-color-primary-contrast) !important;
+}

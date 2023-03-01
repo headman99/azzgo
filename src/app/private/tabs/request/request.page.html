@@ -1,0 +1,99 @@
+<cfe-header [showBackBtn]="false" [title]="'Le mie richieste'"></cfe-header>
+
+
+<ion-segment (ionChange)="segmentChanged($event.target.value)" [value]="tabActive">
+  <ion-segment-button value="pending">
+    <ion-label>DA INVIARE</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="inviate">
+    <ion-label>INVIATE</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="history">
+    <ion-label>CON RISPOSTA</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<ion-content [color]="colorService.selectedTheme">
+  <div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+    <span *ngIf="tabActive=='pending'">
+      <ion-grid fixed>
+        <span *ngFor="let req of requests">
+          <panel (onWhastappClick)="whastapp($event)" [data]="req" (onChattaClick)="goTochat(req.publisher.id)"
+            (onDeleteItem)="deleteItem($event,'P')" (onSendClick)="sendclick($event)"
+            (onOpen)="getDetailsRequest($event)"></panel>
+        </span>
+        <cfe-pagination *ngIf="nextPendingNumber" (onNext)="moreItem($event)" [numberNextItem]="nextPendingNumber">
+        </cfe-pagination>
+
+        <ion-row *ngIf="!requests || requests.length==0">
+          <ion-col size="12" size-md="6">
+            Non hai richieste in sospeso, seleziona i prodotti che desideri e procedi all'acquisto!
+
+          </ion-col>
+          <ion-col size="12" size-md="12"  class="gif_col">
+            <div class="gif_container">
+              <img src="assets/gif/azz_2.gif" alt="Gif" class="gif" />
+            </div>
+            
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </span>
+
+    <span *ngIf="tabActive=='inviate'">
+      <ion-grid fixed>
+        <span *ngFor="let req of requestsSent">
+          <panel (onWhastappClick)="whastapp($event)" (onChattaClick)="goTochat(req.publisher.id)" [data]="req"
+            [buttonSend]="false" (onDeleteItem)="deleteItem($event,'S')" (onSendClick)="sendclick($event)"
+            (onOpen)="getDetailsRequestSent($event)"></panel>
+        </span>
+        <cfe-pagination *ngIf="nextSentNumber" (onNext)="moreItemSent($event)" [numberNextItem]="nextSentNumber">
+        </cfe-pagination>
+        <ion-row *ngIf="!requestsSent || requestsSent.length==0">
+          <ion-col size="12" size-md="6">
+            In questa sezione troverai i tuoi ordini in attesa di risposta.
+          </ion-col> 
+          <ion-col size="12" size-md="12"  class="gif_col">
+            <div class="gif_container">
+              <img src="assets/gif/azz_4.gif" alt="Gif" class="gif" />
+            </div>
+            
+          </ion-col>
+        </ion-row>
+
+
+      </ion-grid>
+    </span>
+
+
+    <span *ngIf="tabActive=='history'">
+      <ion-grid fixed>
+        <span *ngFor="let req of requestsHistory">
+          <panel (onWhastappClick)="whastapp($event)" (onChattaClick)="goTochat(req.publisher.id)" [data]="req"
+            [itemEdit]="false" [buttonSend]="false" (onOpen)="getDetailsHistoryRequest($event)"></panel>
+        </span>
+        <cfe-pagination *ngIf="nextHistoryNumber" (onNext)="moreItemHistory($event)"
+          [numberNextItem]="nextHistoryNumber">
+        </cfe-pagination>
+
+        <ion-row *ngIf="!requestsHistory || requestsHistory.length==0">
+          <ion-col size="12" size-md="6">
+            Non hai richieste inivate, procedi all'acquisto e ritorna in questa sezione, qui troverai tutte le richieste
+            confermate.
+          </ion-col>
+          <ion-col size="12" size-md="12" class="gif_col">
+            <div class="gif_container">
+              <img src="assets/gif/azz_3.gif" alt="Gif" class="gif" />
+            </div>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </span>
+
+
+  </div>
+
+</ion-content>

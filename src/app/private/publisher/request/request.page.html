@@ -1,0 +1,61 @@
+<cfe-header [title]="'Richieste'"></cfe-header>
+
+
+<ion-segment (ionChange)="segmentChanged($event.target.value)" [value]="tabActive">
+  <ion-segment-button value="pending">
+    <ion-label>IN CORSO</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="history">
+    <ion-label>CHIUSE</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+<ion-content [color]="colorService.selectedTheme">
+  <div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+    <span *ngIf="tabActive=='pending'">
+      <ion-grid fixed>
+        <span *ngIf="requests.length==0">
+          <ion-row style="margin-top:15px;">
+            <ion-col style="text-align:center;">Nessuna richieste in corso</ion-col>
+          </ion-row>
+          <ion-row style="display:flex;justify-content:center;">
+            <img src="assets/img/Nodata.png" alt="img" />
+          </ion-row>
+        </span>
+        <span *ngFor="let req of requests">
+          <panel (onWhastappClick)="whastapp($event)" [data]="req" [type]="'cust'"
+            (onChattaClick)="goTochat(req.customer.id)" (onChangeStatus)="changestatus($event)"
+            (onDeleteItem)="deleteItem($event)" (onOpen)="getDetailsRequest($event)"></panel>
+        </span>
+        <cfe-pagination *ngIf="nextPendingNumber" (onNext)="moreItem($event)" [numberNextItem]="nextPendingNumber">
+        </cfe-pagination>
+      </ion-grid>
+    </span>
+
+    <span *ngIf="tabActive=='history'">
+      <ion-grid fixed>
+        <span *ngIf="requestsHistory.length==0">
+          <ion-row style="margin-top:15px;">
+            <ion-col style="text-align:center;">Nessuna richiesta chiusa</ion-col>
+          </ion-row>
+          <ion-row style="display:flex;justify-content:center;">
+            <img src="assets/img/Nodata.png" alt="img" />
+          </ion-row>
+        </span>
+        <span *ngFor="let req of requestsHistory">
+          <panel (onWhastappClick)="whastapp($event)" [data]="req" [type]="'cust'"
+            (onChattaClick)="goTochat(req.customer.id)" [itemEdit]="false" [buttonDenied]="false"
+            (onChangeStatus)="changestatus($event)" (onDeleteItem)="deleteItem($event)"
+            (onOpen)="getDetailsHistoryRequest($event)"></panel>
+        </span>
+        <cfe-pagination *ngIf="nextHistoryNumber" (onNext)="moreItemHistory($event)"
+          [numberNextItem]="nextHistoryNumber">
+        </cfe-pagination>
+      </ion-grid>
+    </span>
+
+
+
+  </div>
+</ion-content>

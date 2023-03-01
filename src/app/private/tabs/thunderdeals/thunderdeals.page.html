@@ -1,0 +1,27 @@
+<cfe-header [showBackBtn]="false" [title]="'Offerte a tempo limitato'"></cfe-header>
+
+<ion-item color="primary" *ngIf="thunderDeals">
+  <ion-icon slot="start" name="flash-outline"></ion-icon>
+  <ion-label>
+    {{thunderDeals.title}} dal {{thunderDeals.startdate}} al {{thunderDeals.enddate}}
+  </ion-label>
+</ion-item>
+
+<ion-content [color]="colorService.selectedTheme">
+	<div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+	<ion-grid fixed>
+	  <ion-row>
+		<ion-col size="12" size-md="6" *ngFor="let post of products" >
+		  <post [itemPost]="post"  (onChattaClick)="goTochat(post.publisher.id)" (goToProductDetails)="goToProductPage(post.id)" (goToProfilePub)="goToPub(post.publisher.id)" (onAddItemTolist)="addItem($event)"></post>
+		</ion-col>
+	  </ion-row>
+	  <ion-row *ngIf="products.length == 0">
+		<ion-col size="12" size-md="6">
+		  Nessun prodotto in offerta per il momento
+		</ion-col>
+	  </ion-row>
+	</ion-grid>
+	<cfe-pagination *ngIf="nextNumber" (onNext)="moreItem($event)" [numberNextItem]="nextNumber"></cfe-pagination>
+	</div>
+  </ion-content>

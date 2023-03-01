@@ -1,0 +1,21 @@
+<ion-tabs >
+	<ion-tab-bar *ngIf="!mobile" slot='top'>
+        <ion-tab-button *ngFor="let tab of tabs" [tab]="tab.tab" layout="icon-start">
+            <ion-icon  [name]="tab.ico"></ion-icon>
+			<ion-label>
+            {{tab.text}}
+        </ion-label>
+
+        </ion-tab-button>
+	</ion-tab-bar>
+    <ion-tab-bar *ngIf="mobile" slot='bottom'>
+        <ion-tab-button *ngFor="let tab of tabs" [tab]="tab.tab">
+            <ion-badge *ngIf="tab.notification && notifications[tab.tab] > 0" color="danger">{{notifications[tab.tab]}}</ion-badge>
+            <ion-icon  [name]="tab.ico"></ion-icon>
+			<ion-label>
+            {{tab.text}}
+        </ion-label>
+
+        </ion-tab-button>
+	</ion-tab-bar>
+</ion-tabs>

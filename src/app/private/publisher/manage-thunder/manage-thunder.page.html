@@ -1,0 +1,25 @@
+<cfe-header [title]="'Offerte speciali'"></cfe-header>
+
+<ion-content [color]="colorService.selectedTheme">
+  <div class="back-image"
+    [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+    <ion-list>
+      <span *ngIf="thunderlist.length==0">
+        <ion-row style="margin-top:15px;">
+          <ion-col style="text-align:center;">Nessuna offerta speciale in corso</ion-col>
+        </ion-row>
+        <ion-row style="display:flex;justify-content:center;">
+          <img src="assets/img/Nodata.png" alt="img" />
+        </ion-row>
+      </span>
+      <ion-item *ngFor="let thunder of thunderlist; let i = index">
+        <ion-label>
+          <h2> {{thunder.title}} </h2>
+          <p> dal {{thunder.startdate}} al {{thunder.enddate}}</p>
+        </ion-label>
+        <ion-icon slot="end" name="arrow-forward-outline" routerLink="thunder/{{thunder.id}}"></ion-icon>
+      </ion-item>
+    </ion-list>
+    <cfe-pagination *ngIf="nextNumber" (onNext)="moreItem($event)" [numberNextItem]="nextNumber"></cfe-pagination>
+  </div>
+</ion-content>

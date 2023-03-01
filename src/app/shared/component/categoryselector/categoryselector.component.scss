@@ -1,0 +1,27 @@
+.categoryItem{
+
+background-color: white;
+border: 1px solid black;
+border-radius: 6px;
+}
+
+.example::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .example {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .customRowClass{
+    flex-flow: row;
+    display: flex;
+    overflow-x: auto;
+  }
+
+
+  .categoriaSelected{
+    background: #f79468 !important;
+  }

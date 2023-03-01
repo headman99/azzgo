@@ -1,0 +1,33 @@
+// Desktop
+@import "../theme/variables.scss";
+ion-header .toolbar {
+    margin: auto;
+   }
+
+
+   @media (min-width: map-get($grid-breakpoints, lg)) {
+    ion-navbar.toolbar,
+    ion-header .toolbar[fixed],
+    ion-footer .toolbar[fixed],
+    ion-tabs .tabbar {
+      margin:0;
+      background-color: aqua;
+      padding-right: calc((100% - #{map-get($grid-max-widths, lg)}) / 2);
+      padding-left: calc((100% - #{map-get($grid-max-widths, lg)}) / 2);
+    }
+    
+   }
+
+ion-header{
+  background-color: blue;
+}
+
+/*ion-content{
+  --background:var(--ion-color-favorite);
+  --color:var(--ion-color-favorite-contrast)
+}*/
+
+
+
+
+

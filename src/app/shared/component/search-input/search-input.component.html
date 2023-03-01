@@ -1,0 +1,54 @@
+<cfe-header [hidenotification]="true"  [title]="'Ricerca'" [showBackBtn]="false" [showMenuBtn]="false" [showCloseBtn]="true"
+	(onCloseClick)="close()"></cfe-header>
+
+<ion-content>
+	<div>
+		<form #f="ngForm">
+			<ion-grid fixed>
+				<ion-row justify-content-center>
+					<ion-col size-md="3" size-lg="1" size-xs="0"></ion-col>
+					<ion-col align-self-center size-md="6" size-lg="10" size-xs="12">
+						<div padding>
+							<ion-item>
+								<ion-input name="testo" type="text" placeholder="Cerca" ngModel required></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-select name="categoryid" ngModel required placeholder="Categoria">
+									<ion-select-option *ngFor="let storeCat of categories " [value]="storeCat.code">
+										{{storeCat.description}}</ion-select-option>
+								</ion-select>
+							</ion-item>
+							<span>
+								<maps-autocomplete [text]="filterSearch?.address" (onGetPlace)="getPlace($event,f)"
+									adressType="establishment">
+								</maps-autocomplete>
+							</span>
+						</div>
+					</ion-col>
+					<ion-col size-md="3" size-lg="1" size-xs="0"></ion-col>
+				</ion-row>
+				<ion-row>
+					<ion-col size-md="3" size-lg="8" size-xs="0"></ion-col>
+					<ion-col size-md="6" size-lg="3" size-xs="12">
+					</ion-col>
+				</ion-row>
+
+				<ion-row >
+					<ion-col size="12" size-md="6">
+						Per trovare cosa stai cercando affina la ricerca, con parole chiave e categoria!
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+		</form>
+
+
+	</div>
+
+
+</ion-content>
+<ion-footer>
+	<ion-toolbar>
+		<ion-button (click)="deleteFilter()">Azzera Filtri</ion-button>
+		<ion-button type="submit" (click)="applicaFiltri(f)" type="submit">Applica</ion-button>
+	</ion-toolbar>
+</ion-footer>

@@ -1,0 +1,36 @@
+<cfe-header [showBackBtn]="true" (click)="goHome()" [title]="'Personalizza'"></cfe-header>
+
+<ion-content [color]="colorService.selectedTheme" #content>
+   <div class="back-image"
+      [ngStyle]="{'background': 'url(' + colorService.selectedImageUrl + ') no-repeat 0 0 / cover '}">
+      <ion-grid fixed>
+         <ion-row style="display:flex;text-align:center;justify-content: space-between;align-items: center;">
+            <ion-text style="margin-left: 30px;font-weight: bold;font-size: 15px;">
+               Scegli il tema che preferisci
+            </ion-text>
+            <ion-button style="margin-right: 10px;" (click)="resetPreferences()"> reset</ion-button>
+         </ion-row>
+         <ion-row class="margin-left"  *ngFor="let key of KeyArrayOfColors()">
+            <ion-row class="theme_label_row">
+               <div class="theme_label_column">
+                  <ion-text class="theme_label">
+                     {{key}}
+                  </ion-text>
+                  <div class="shadow_separator"></div>
+               </div>
+            </ion-row>
+            <ion-row class="scrollX">
+               <ion-col class="align-center" size="auto" *ngFor="let theme of colors[key]">
+                  <app-applycolor [color]="theme" (newColorEvent)="changeTheme($event)"> </app-applycolor>
+               </ion-col>
+            </ion-row>
+
+         </ion-row>
+      </ion-grid>
+
+      <ion-item id="pickphoto">
+         <cfe-camera [mode]="cameramode" [label]="'Scegli immagine di sfondo'" (onTakePhoto)="changePhotoTheme($event)">
+         </cfe-camera>
+      </ion-item>
+   </div>
+</ion-content>

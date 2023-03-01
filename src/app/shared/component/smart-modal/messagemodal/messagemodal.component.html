@@ -1,0 +1,19 @@
+
+<cfe-header [showBackBtn]="false" [hidenotification]="true" [showMenuBtn]="false" [showCloseBtn]="true" [title]="title"></cfe-header>
+<ion-content padding>
+    <div style="padding: 1.4em;" [innerHTML]="content">
+
+
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-6 *ngFor="let btn of buttons">
+                <ion-button  size="full"  [color]="btn.class"   (click)="close('');btn.action();">
+                    {{btn.text}}
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

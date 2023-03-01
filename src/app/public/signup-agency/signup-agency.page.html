@@ -1,0 +1,70 @@
+<cfe-header [hidenotification]="true" [showCloseBtn]="false" [showMenuBtn]="false" [showBackBtn]="true" [title]="'Richiesta registrazione'"></cfe-header>
+
+
+<ion-content>
+    <form #f="ngForm" (ngSubmit)="register(f)">
+        <ion-grid fixed>
+          <ion-row justify-content-center >
+            <ion-col size-md="3" size-lg="1" size-xs="0"></ion-col>
+            <ion-col align-self-center size-md="6" size-lg="10" size-xs="12">
+              <div text-center>
+                <h3>Inserisci i dati</h3>
+              </div>
+              <div padding>
+                <ion-item>
+                  <ion-input name="name" type="text" placeholder="Nickname" ngModel required></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-input name="businessname" type="text" placeholder="Nome Azienda" ngModel required></ion-input>
+                  </ion-item>
+                <ion-item>
+                  <ion-input name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  placeholder="latuaemail@email.com" ngModel required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input name="password" [type]="passwordType" placeholder="Password" ngModel required></ion-input>
+                  <ion-icon  *ngIf="passwordType =='password'"  (click)="changeType()" name="eye-outline" slot="end"></ion-icon>
+								<ion-icon *ngIf="passwordType =='text'"  (click)="changeType()" slot="end" name="eye-off-outline"></ion-icon>
+					
+                </ion-item>
+                <app-passoword-strength-bar (infoClicked)="onClickPasswordReq()"  [passwordToCheck]="f.value.password" [barLabel]="'Sicurezza password'"></app-passoword-strength-bar>
+                <ion-item>
+                  <ion-input name="confirm" type="password" placeholder="Conferma Password" ngModel required></ion-input>
+                 </ion-item>
+                <ion-item>
+                    <ion-input name="phone" type="text"  pattern="^[0-9]*$"  placeholder="Telefono" ngModel required></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-select name="category" ngModel required placeholder="Categoria">
+                        <ion-select-option value="SRV">Servizi</ion-select-option>
+                        <ion-select-option value="FOD">Food</ion-select-option>
+                        <ion-select-option value="SHP">Shopping</ion-select-option>
+                      </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-input name="vatnumber" type="text" pattern="^[0-9]{11}$"  placeholder="PIVA" ngModel required></ion-input>
+                </ion-item>
+                <span>
+                <ion-icon name="location-outline"></ion-icon>
+                <maps-autocomplete (setAddress)="getAddress($event,f)" adressType="establishment"></maps-autocomplete>
+                <ion-item (click)="onclickterms()">
+                    <ion-label class="ion-text-wrap" >Ai sensi dell’art. 13 del Regolamento UE 679/2016 GDPR ho preso visione dell’informativa.</ion-label>
+                    <ion-icon *ngIf="!terms" slot="start" name="square-outline"></ion-icon>
+                    <ion-icon *ngIf="terms" slot="start" name="checkbox-outline"></ion-icon>
+                  </ion-item>
+            </span>
+              </div>
+           </ion-col>
+           <ion-col size-md="3" size-lg="1" size-xs="0"></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size-md="3" size-lg="8" size-xs="0"></ion-col>
+            <ion-col size-md="6" size-lg="3" size-xs="12">
+              <ion-button type="submit"   type="submit" expand="block">Registrati</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+
+
+
+</ion-content>

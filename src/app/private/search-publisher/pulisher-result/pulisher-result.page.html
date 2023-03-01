@@ -1,0 +1,17 @@
+<cfe-header [showMenuBtn]="false" [title]="'Stores'"></cfe-header>
+
+<ion-searchbar showCancelButton="focus" (change)="searchPublisherByName($event)" (ionCancel)="ngOnInit()"></ion-searchbar>
+
+<ion-content>
+
+  <ion-grid fixed>
+    <ion-list>
+      <ion-item *ngFor="let publisher of publisherList">
+        <ion-label>{{publisher.businessname}}</ion-label>
+        <ion-icon (click)="goToPub(publisher.id)"  name="arrow-forward-outline" slot="end"></ion-icon>
+      </ion-item>
+      <cfe-pagination *ngIf="nextNumber" (onNext)="moreItem($event)" [numberNextItem]="nextNumber"></cfe-pagination>
+    </ion-list>
+  </ion-grid>
+
+</ion-content>

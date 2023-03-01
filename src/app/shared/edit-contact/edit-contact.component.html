@@ -1,0 +1,38 @@
+<cfe-header [showCloseBtn]="true" [hidenotification]="true" (onCloseClick)="retry()" [showMenuBtn]="false" [showBackBtn]="false"  [title]="title"></cfe-header>
+
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            Valore attuale: {{contact?.value}}
+          </ion-label>
+
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-center>
+      <ion-col col-12>
+        <div padding>
+          <ion-item *ngIf="contact.typecode==='ADR'">
+            <ion-icon name="location-outline"></ion-icon>
+            <maps-autocomplete (setAddress)="getAddress($event)" adressType="establishment"></maps-autocomplete>
+          </ion-item>
+          <ion-item *ngIf="contact.typecode==='PNE'">
+            <ion-icon  style="margin-right: 1em;" name="call-outline"></ion-icon>     
+            <ion-input name="phone" type="text"  pattern="^[0-9]*$" [(ngModel)]="number"></ion-input>        
+          </ion-item>
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button slot="start" (click)="retry()">ANNULLA</ion-button>
+    <ion-button slot="end" (click)="done()"> {{labelButton}} </ion-button>
+  </ion-toolbar>
+</ion-footer>
