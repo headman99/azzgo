@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 export class CustomizePage implements OnInit {
   colors:any =  themes;
   imgURL: any;
-  cameramode = environment.MOBILE ? 'mobile' : 'web';
+  cameramode:any;
   filedata: any;
   user: User;
 
@@ -30,6 +30,13 @@ export class CustomizePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+      // true for mobile device
+      this.cameramode='mobile'
+    }else{
+      // false for not mobile device
+      this.cameramode='web'
+    }
   }
 
   changeTheme(theme: string) {

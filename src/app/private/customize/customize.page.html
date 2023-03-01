@@ -28,7 +28,7 @@
          </ion-row>
       </ion-grid>
 
-      <ion-item id="pickphoto">
+      <ion-item id="pickphoto" *ngIf="this.cameramode ==='mobile'">
          <cfe-camera [mode]="cameramode" [label]="'Scegli immagine di sfondo'" (onTakePhoto)="changePhotoTheme($event)">
          </cfe-camera>
       </ion-item>
