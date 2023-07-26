@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="cfe.developer.azzgo" version="1.8.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="10810" id="cfe.azzgo" version="1.8.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>AzzGo</name>
     <description>AzzGo. Tutto quello che cerchi è qui</description>
     <author email="azzgoapp@gmail.com" href="http://azzgo.it/">AzzGo Team</author>
@@ -20,7 +20,7 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="iosPersistentFileLocation" value="Library" />
-    <preference name="android-targetSdkVersion" value="30" />
+    <preference name="android-targetSdkVersion" value="31" />
     <preference name="AndroidLaunchMode" value="singleTask" />
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">

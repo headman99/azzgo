@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import * as ionic5 from 'ionic5-star-rating'
+//import * as ionic5 from 'ionic5-star-rating'
 
 @Component({
   selector: 'app-submit-feedback',

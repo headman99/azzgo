@@ -5,7 +5,7 @@
         ],
         "target": {
             "namespace": "android_app",
-            "package_name": "cfe.developer.azzgo",
+            "package_name": "cfe.azzgo",
             "sha256_cert_fingerprints": [
                 "64:A7:23:31:87:8F:FC:48:9B:43:16:01:D3:41:C6:F7:01:E9:87:DE:EE:BF:2F:25:D4:D9:90:05:27:BD:C0:6A"
             ]

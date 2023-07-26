@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from 'src/app/shared/rest/api/auth.service';
 import { UserData } from 'src/app/shared/provider/user-data';
 import { ColorServiceService } from 'src/app/shared/services/color-service.service'
-declare var window
+
 
 const httpOptions = {
 	headers: new HttpHeaders({
@@ -44,8 +44,9 @@ export class LoginPage implements OnDestroy {
 	}
 	onLogin(form: NgForm) {
 		this.submitted = true;
-		this.authSrv.checkEmailVerified({ email: this.login.username, password: this.login.password }).subscribe((resp) => {
+		this.authSrv.checkEmailVerified({ email: this.login.username, password : this.login.password}).subscribe((resp) => {
 			if (resp) {
+				console.log("login")
 				this.authSrv.login({ email: this.login.username, password: this.login.password }).subscribe((resp) => {
 					this.userData.login(resp).then(() => {
 						console.log('login effettuato');
@@ -65,13 +66,13 @@ export class LoginPage implements OnDestroy {
 				this.alert.showalert('Attenzione', 'Per procedere è necessario verificare la propria mail', [
 					{
 						text: 'Chiudi',
-						handler: (args) => {
+						handler: () => {
 
 						}
 					}, {
 						text: 'Manda',
 						handler: () => {
-							this.authSrv.sendVerificationMail({ email: this.login.username, password: this.login.password }).subscribe(result => {
+							this.authSrv.sendVerificationMail({ email: this.login.username, password:this.login.password }).subscribe(result => {
 								if (result.result == 1) {
 									this.alert.show(result.message)
 								} else {

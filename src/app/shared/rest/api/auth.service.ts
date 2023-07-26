@@ -56,7 +56,7 @@ export class AuthService {
 		return this.http.get(ROUTES.AUTH.DELETE_PREFERENCES);
 	}
 
-	sendVerificationMail(_data:LoginCommand){
+	sendVerificationMail(_data:any){
 		return this.http.post(ROUTES.AUTH.SEND_VERIFICATION_MAIL,_data)
 	}
 
@@ -64,7 +64,7 @@ export class AuthService {
 		return this.http.get(ROUTES.AUTH.GET_USER_INFO)
 	}
 
-	checkEmailVerified(_data: LoginCommand){
+	checkEmailVerified(_data: any){
 		return this.http.post(ROUTES.AUTH.CHECK_EMAIL_VERIFIED,_data)
 	}
 
